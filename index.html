@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Милое приключение: Спаси котенка</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui-overlay">
+            <div id="top-bar">
+                <div id="score-board">🐟 Рыбки: <span id="current-score">0</span> / 3 | 🎀 Рекорд: <span id="best-score">0</span></div>
+                <div id="controls-hint">←/→ или A/D — идти | Пробел/W — прыг</div>
+            </div>
+            
+            <div id="menu-screen" class="screen">
+                <h1 id="menu-title">🐱 В поисках котенка 🐱</h1>
+                <p id="menu-desc">Помоги милой девочке перебраться через лавандовые острова и найти своего пушистого друга! Лови вкусных оранжевых рыбок по пути и берегись огненной лавы с острыми кристаллами!</p>
+                <button id="btn-start" class="game-btn">Начать прогулку</button>
+            </div>
+
+            <div id="pause-screen" class="screen hidden">
+                <h1>Минутка отдыха 🎀</h1>
+                <button id="btn-resume" class="game-btn">Продолжить</button>
+                <button id="btn-restart-pause" class="game-btn secondary">Заново</button>
+            </div>
+
+            <div id="gameover-screen" class="screen hidden">
+                <h1 id="gameover-title">Ой, неосторожно!</h1>
+                <p id="gameover-stats">Собрано рыбок: <span id="final-score">0</span> из 3</p>
+                <button id="btn-retry" class="game-btn">Попробовать еще раз</button>
+            </div>
+
+            <div id="hud-controls">
+                <button id="btn-pause-hud" class="hud-btn hidden">⏸ Пауза</button>
+            </div>
+        </div>
+        
+        <!-- Класс hidden-touch убран, кнопки теперь ВСЕГДА отображаются поверх Canvas -->
+        <div id="touch-controls">
+            <div class="touch-group-left">
+                <button id="touch-left" class="action-touch-btn">◀</button>
+                <button id="touch-right" class="action-touch-btn">▶</button>
+            </div>
+            <div class="touch-group-right">
+                <button id="touch-jump" class="action-touch-btn jump-btn">▲ ПРЫЖОК</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
+

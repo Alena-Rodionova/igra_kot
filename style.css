@@ -1,0 +1,226 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2b263d;
+    color: #ffffff;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+#game-container {
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(209, 196, 233, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #1e1b29;
+    max-width: 100%;
+}
+
+canvas {
+    display: block;
+}
+
+#ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    box-sizing: border-box;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 5;
+}
+
+#top-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#score-board, #controls-hint {
+    background: rgba(43, 38, 61, 0.85);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 2px solid #b39ddb;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    color: #ede7f6;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 27, 41, 0.93);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    text-align: center;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.screen.hidden {
+    display: none !important;
+}
+
+h1 {
+    margin: 0 0 15px 0;
+    font-size: 34px;
+    color: #ffb74d;
+    text-shadow: 0 4px 8px rgba(255, 183, 77, 0.2);
+}
+
+p {
+    margin: 0 0 25px 0;
+    font-size: 15px;
+    color: #d1c4e9;
+    max-width: 460px;
+    line-height: 1.6;
+}
+
+.game-btn {
+    background: linear-gradient(135deg, #ffb74d, #ffa726);
+    color: #3e2723;
+    border: none;
+    padding: 14px 32px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 6px;
+    min-width: 180px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 167, 38, 0.4);
+    transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.game-btn:hover {
+    box-shadow: 0 6px 20px rgba(255, 167, 38, 0.6);
+    transform: translateY(-1px);
+}
+
+.game-btn.secondary {
+    background: linear-gradient(135deg, #b39ddb, #9575cd);
+    color: white;
+    box-shadow: 0 4px 15px rgba(149, 117, 205, 0.4);
+}
+
+.game-btn:active {
+    transform: translateY(1px);
+}
+
+#hud-controls {
+    position: absolute;
+    top: 60px;
+    right: 15px;
+    pointer-events: auto;
+}
+
+.hud-btn {
+    background: rgba(149, 117, 205, 0.3);
+    color: #ede7f6;
+    border: 2px solid #b39ddb;
+    padding: 8px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.hud-btn.hidden {
+    display: none;
+}
+
+/* --- ОБНОВЛЕННЫЙ БЛОК ЭКРАННЫХ КНОПОК --- */
+#touch-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 25px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 8;
+    pointer-events: none; /* Пропускает клики сквозь прозрачные зоны оверлея */
+}
+
+.touch-group-left, .touch-group-right {
+    display: flex;
+    gap: 15px;
+    pointer-events: auto; /* Включает регистрацию кликов на самих кнопках */
+}
+
+.action-touch-btn {
+    width: 70px;
+    height: 70px;
+    background: rgba(43, 38, 61, 0.7); /* Плотный полупрозрачный фон, чтобы кнопки не сливались */
+    border: 3px solid #b39ddb;
+    border-radius: 50%;
+    color: #ede7f6;
+    font-size: 26px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.1s, border-color 0.1s, transform 0.05s;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Состояние при клике/удержании мышкой или пальцем */
+.action-touch-btn:active {
+    background: #ffa726; 
+    border-color: #ffb74d;
+    color: #3e2723;
+    transform: scale(0.92);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.action-touch-btn.jump-btn {
+    width: 130px;
+    border-radius: 35px;
+    font-size: 16px;
+    border-color: #ffb74d;
+    color: #ffb74d;
+    background: rgba(255, 183, 77, 0.15);
+}
+
+.action-touch-btn.jump-btn:active {
+    background: linear-gradient(135deg, #ffb74d, #ffa726);
+    color: #3e2723;
+    border-color: #ff9800;
+}
+
+
+
+
+
+
+
+
+
